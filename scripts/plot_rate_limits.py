@@ -2,9 +2,10 @@
 
 O4 limits use R90 = 2.303 / VT with VT from the fit in vt_fit.py. O3 limits
 are from the distance reach of Dhurkunde et al. (data/o3_reach.csv) over 272
-days; the e20 = 0.2 limit is divided by 0.725 to account for the volume lost
-by the TaylorF2Ecc templates used in that search. The inset shows VT beyond
-the template bank edge (e20 = 0.28) relative to VT inside it.
+days; the e20 = 0.2 limit is scaled by the mean VT ratio of the TEOBResumS
+and TaylorF2Ecc banks at e20 ~ 0.28 (data/bank_comparison.csv) to account for
+the volume lost by the TaylorF2Ecc templates used in that search. The inset
+shows VT beyond the template bank edge (e20 = 0.28) relative to VT inside it.
 """
 import numpy as np
 import matplotlib.pyplot as plt
@@ -17,10 +18,17 @@ from vt_fit import fit_vt
 
 O3_YEARS = 272.0 / 365.25
 O4_YEARS = 400.90 / 365.25
-TAYLORF2ECC_VT_FACTOR = 0.725
 O4_COLOR, O3_COLOR = "#1b7837", "#525252"
 MC_MIN, MC_MAX = 1.70, 4.50
 R_MIN, R_MAX = 3.8, 720.0
+
+
+def taylorf2ecc_gain():
+    """Mean VT(TEOBResumS) / VT(TaylorF2Ecc) at e20 ~ 0.28."""
+    table = np.genfromtxt(DATA / "bank_comparison.csv", delimiter=",",
+                          names=True, dtype=None, encoding="utf-8")
+    keep = (table["regime"] == "high_ecc") & (table["bank"] == "TEOBResumS")
+    return table["ratio"][keep].mean()
 
 
 def o3_limit(mc, mc_data, reach_mpc, factor=1.0):
@@ -61,7 +69,7 @@ def main():
                                             skiprows=1, unpack=True)
     mc = np.linspace(MC_MIN, MC_MAX, 300)
     o3_circular = o3_limit(mc, mc_o3, reach_e0)
-    o3_eccentric = o3_limit(mc, mc_o3, reach_e02, TAYLORF2ECC_VT_FACTOR)
+    o3_eccentric = o3_limit(mc, mc_o3, reach_e02, 1 / taylorf2ecc_gain())
 
     fig, ax = plt.subplots(figsize=(5.1, 4.05))
     ax.grid(True, which="both", ls=":", alpha=0.5)
