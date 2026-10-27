@@ -1,0 +1,13 @@
+pipeline,run,bank,ifo,n_jobs,templates_per_core
+multiband,teobHM,teob,H1,97,66683.1
+multiband,teobHM,teob,L1,67,165447.9
+multiband,teobHM_prec,teob,H1,97,48477.4
+multiband,teobHM_prec,teob,L1,67,87019.1
+pycbc_inspiral,teobHM-TF2,TaylorF2,H1,1180,4727.8
+pycbc_inspiral,teobHM-TF2,TaylorF2,L1,1210,5301.1
+pycbc_inspiral,teobHM_prec-TF2,TaylorF2,H1,1180,6517.9
+pycbc_inspiral,teobHM_prec-TF2,TaylorF2,L1,1210,7283.6
+pycbc_inspiral,teobHM-TF2Ecc,TaylorF2Ecc,H1,1180,2708.6
+pycbc_inspiral,teobHM-TF2Ecc,TaylorF2Ecc,L1,1210,3132.6
+pycbc_inspiral,teobHM_prec-TF2Ecc,TaylorF2Ecc,H1,1180,3609.1
+pycbc_inspiral,teobHM_prec-TF2Ecc,TaylorF2Ecc,L1,1210,4317.2
