@@ -16,7 +16,7 @@ The observation of orbital eccentricity in compact binary coalescences would pro
 | `data/o3_reach.csv` | Distance reach of the previous O3 search [Mpc] |
 | `data/bank_comparison.csv` | Sensitive volume-time of each template bank for one week of O4a data |
 | `data/throughput.csv` | Filtering throughput of the multiband search and `pycbc_inspiral` |
-| `scripts/` | Scripts to reproduce Figures 2, 3, 4 and 16 |
+| `scripts/` | Scripts to reproduce Figures 2, 3, 4 and 16, and the GW200105_162426 rates (`gw200105_rates.py`) |
 
 To make the figures (requires `numpy` and `matplotlib`):
 ```
